@@ -1,0 +1,10 @@
+{
+  "errors": [
+    {
+      "code": "INVALID_INPUT",
+      "detail": "#(error)",
+      "title": "some title",
+      "status": "some status"
+    }
+  ]
+}

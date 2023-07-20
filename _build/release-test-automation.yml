@@ -1,0 +1,61 @@
+trigger:
+  batch: true
+  branches:
+    include:
+    - release/*
+  paths:
+    include:
+    - _build/
+
+# Set variables
+variables:
+  cucumberReportDir: /target/cucumber-html-reports
+
+pool:
+  name: 'Private-Linux-Agents'
+
+steps:
+  # Read and consume secret keys from azure keyVault
+  - task: AzureKeyVault@1
+    inputs:
+      azureSubscription: '$(your-AZ-Subscription)'
+      keyVaultName: 'your-kv-01'
+      secretsFilter: 'AUTOMATION-TEST-RAIL-USER,AUTOMATION-TEST-RAIL-KEY'
+
+  # Run maven execution task and provide details to read test result file
+  - task: Maven@3
+    inputs:
+      mavenPomFile: 'pom.xml'
+      goals: 'clean test'
+      options: '-Dkarate.env=uat -DtestRailUser=$(AUTOMATION-TEST-RAIL-USER) -DtestRailKey=$(AUTOMATION-TEST-RAIL-KEY) -Dkarate.options="--tags @test1,@test2" -Dtest=TestRunner'
+      publishJUnitResults: true
+      testResultsFiles: '**/surefire-reports/features.*.*.xml'
+      testRunTitle: 'API.Automation.Test'
+      javaHomeOption: 'JDKVersion'
+      mavenVersionOption: 'Default'
+      mavenAuthenticateFeed: false
+      effectivePomSkip: false
+      sonarQubeRunAnalysis: false
+
+  # Copy generate cucumber test report directory
+  - task: CopyFiles@2
+    condition: succeededOrFailed()
+    inputs:
+      SourceFolder: $(Build.Repository.LocalPath)$(cucumberReportDir)
+      targetFolder: $(Build.ArtifactStagingDirectory)
+      contents: "**"
+      overWrite: true
+      displayName: 'Copy report to Local Path of Repository'
+
+  # Publish cucumber test report directory
+  - task: PublishBuildArtifacts@1
+    condition: succeededOrFailed()
+    inputs:
+      pathToPublish: $(Build.ArtifactStagingDirectory)
+      artifactName: CucumberHTMLReport
+
+  # Download cucumber test report directory
+  - task: DownloadPipelineArtifact@2
+    condition: succeededOrFailed()
+    inputs:
+      artifact: CucumberHTMLReport

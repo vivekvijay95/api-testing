@@ -1,0 +1,10 @@
+{
+  "errors": [
+    {
+      "code": "#string",
+      "detail": "#string",
+      "title": "#string",
+      "status": "#string"
+    }
+  ]
+}

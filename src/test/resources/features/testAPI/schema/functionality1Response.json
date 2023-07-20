@@ -1,0 +1,67 @@
+{
+  "scenarioType1": {
+    "data": {
+      "a": "#(a)",
+      "b": "type",
+      "attributes": {
+        "c": "#(attribute0)",
+        "d": "#(attribute1)",
+        "e": {
+          "f": "#(attribute3)",
+          "g": "#(attribute4)"
+        }
+      },
+      "h": {
+        "status": {
+          "data": null,
+          "links": {
+            "related": "#(RESPONSE_ATTRIBUTE_1)"
+          }
+        },
+        "j": {
+          "data": null,
+          "links": {
+            "related": "#(RESPONSE_ATTRIBUTE_2)"
+          }
+        },
+        "k": {
+          "data": [],
+          "links": {
+            "self": "#(RESPONSE_ATTRIBUTE_3)",
+            "related": "#(RESPONSE_ATTRIBUTE_4)"
+          }
+        }
+      }
+    }
+  },
+  "scenarioType2": {
+    "data": {
+      "a": "#(a)",
+      "b": "type",
+      "attributes": {
+        "c": "#(attribute0)"
+      },
+      "relationships": {
+        "status": {
+          "data": null,
+          "links": {
+            "related": "#(RESPONSE_ATTRIBUTE_1)"
+          }
+        },
+        "business": {
+          "data": null,
+          "links": {
+            "related": "#(RESPONSE_ATTRIBUTE_2)"
+          }
+        },
+        "applicants": {
+          "data": [],
+          "links": {
+            "self": "#(RESPONSE_ATTRIBUTE_3)",
+            "related": "#(RESPONSE_ATTRIBUTE_4)"
+          }
+        }
+      }
+    }
+  }
+}

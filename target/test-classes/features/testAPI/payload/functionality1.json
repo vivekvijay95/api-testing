@@ -1,0 +1,28 @@
+{
+  "scenarioType1": {
+    "data": {
+      "type": "#(type)",
+      "attributes": {
+        "attribute0": "#(attribute0)",
+        "attribute1": "#(attribute1)",
+        "attribute2": {
+          "attribute3": "#(attribute3)",
+          "attribute4": "#(attribute4)"
+        }
+      }
+    }
+  },
+  "scenarioType2": {
+    "data": {
+      "type": "#(type)",
+      "attributes": {
+        "attribute0": "#(attribute0)"
+      }
+    }
+  },
+  "scenarioType3": {
+    "data": {
+      "type": "#(type)"
+    }
+  }
+}
